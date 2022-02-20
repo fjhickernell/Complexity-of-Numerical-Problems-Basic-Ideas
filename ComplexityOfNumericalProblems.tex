@@ -35,6 +35,7 @@
 \setlength{\arraycolsep}{0.5ex}
 
 
+\DeclareMathOperator{\DATA}{DATA}
 \DeclareMathOperator{\SOL}{SOL}
 \DeclareMathOperator{\OUT}{OUT}
 \DeclareMathOperator{\CRIT}{CRIT}
@@ -92,34 +93,46 @@
 Define a (continuous) \alert{mathematical problem} as follows:
 \begin{align*}
     \cf & = \text{set of input functions} \\
-    \cg & = \text{set of possible outputs} \\
+    \cg & = \text{set of possible solutions} \\
     \SOL :\cf \to \cg &= \text{a solution operator}
 \end{align*}
-Some examples include integration and root-finding
+Examples include integration and root-finding
 \begin{align*}
-   \cf &= \{f \in C^2[0,1] : \norm[2]{f''} \le 1\} & \cf &= C[0,1]\\
+   \cf &= \{f \in C[0,1] : \norm[2]{f''} \le 1\} & \cf &= \{f \in C[0,1] : f(0) f(1) \le 0 \}\\
     \cg & = \reals &  \cg &= \text{set of all closed subsets of } [0,1]\\
     \SOL(f) &= \int_0^1 f(x) \, \dif x & \SOL(f) & = f^{-1}(0)
 \end{align*}
-Want to find a good \alert{numerical solution} to the mathematical problem
+Want to find a good \alert{numerical solution} to the mathematical problem $\SOL(f) = ?$
 \end{frame}
 
 
 \begin{frame}{Numerical Problems}
 
 \vspace{-5ex}
-Want numerical solution, $\OUT$, to be close to true solution, $\SOL(f)$, according to a specified error criterion, $\CRIT$, and tolerance, $\veps$:
+Numerical solution, $\OUT$, should be be close to true solution, $\SOL(f)$, according to an error criterion, $\CRIT$, and tolerance, $\veps$:
 \begin{align*}
     \OUT & = \text{numerical solution} \in \cg \\
     \veps & = \text{scalar or vector of error tolerances} \in \ce \subseteq [0,\infty)^s\\
     \CRIT: \cg \times \cg \times \ce \to \{\text{true}, \text{false}\}& = \text{error criterion} \\
-\intertext{An \alert{acceptable numerical solution} satisfies $\CRIT(\OUT,\SOL(f),\veps) = \text{true}$. In addition to knowledge about the input function based on the definition of $\cf$, the algorithm constructing the numerical solution samples the input function, e.g., by generating function values, or perhaps derivative values:}
-    \Lambda &= \text{set of allowable data functionals on } \cf
+\intertext{\alert{Acceptable numerical solutions} satisfy $\CRIT(\OUT,\SOL(f),\veps) = \text{true}$. \endgraf
+In addition to knowledge about $f$ based on the definition of $\cf$, the algorithm constructing the numerical solution samples $f$, e.g., by generating function values or  derivative values:}
+    \Lambda: \cf \to \reals^t &= \text{set of allowable data functionals}
 \end{align*}
-The description of a \alert{numerical problem} can be written as the ordered triple $(\SOL, \CRIT, \Lambda)$
+A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.
 \end{frame}
 
 \section{Algorithms}
+
+\begin{frame}{Data Collection}
+Algorithms for solving numerical problems $(\SOL, \CRIT, \Lambda)$ must collect data about the input function by applying a sequence of data functionals.  The data collection operator $\DATA: \cup_{n \in \natzero} \Lambda^n \times \cg^n \to  \Lambda^n \times \cg^n $ is defined iteratively,
+
+
+\end{frame}
+
+\begin{frame}{Stopping Criteria}
+
+\end{frame}
+
 
 
 \end{document}
