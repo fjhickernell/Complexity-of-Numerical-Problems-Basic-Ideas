@@ -124,8 +124,17 @@ A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \L
 \section{Algorithms}
 
 \begin{frame}{Data Collection}
-Algorithms for solving numerical problems $(\SOL, \CRIT, \Lambda)$ must collect data about the input function by applying a sequence of data functionals.  The data collection operator $\DATA: \cup_{n \in \natzero} \Lambda^n \times \cg^n \to  \Lambda^n \times \cg^n $ is defined iteratively,
 
+\vspace{-4ex}
+Algorithms for solving numerical problems $(\SOL, \CRIT, \Lambda)$ must collect data about the input function by applying a sequence of data functionals.  The data collection operator $\DATA: \cf \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t}) $ is defined iteratively.  Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
+\[
+\DATA(f,\mZ_0) = \begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n_1} & L_{n_1}(f) \end{pmatrix} = \mZ_{n_1}, \quad 
+\DATA(f,\mZ_{n_1}) = 
+\begin{pmatrix}\mZ_{n_1} \\ \begin{pmatrix} L_{n_1+1} & L_{n_1+1}(f) \\ \vdots & \vdots \\ L_{n_2} & L_{n_2}(f) \end{pmatrix}  \end{pmatrix} = \mZ_{n_2}, \quad \ldots
+\]
+where $0 < n_1 < n_2 < \cdots$ is a strictly increasing sequence of positive integers, and $n_{i+1}$ depends on $\mZ_{n_i}$.
+
+$L_1, L_2, \ldots$ is the \alert{design}.
 
 \end{frame}
 
