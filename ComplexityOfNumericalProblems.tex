@@ -166,7 +166,20 @@ The \alert{data based} stopping criterion
 \[
 \STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
 \]
-determines whether there exists an output, $\OUT$, that satisfies the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$
+determines whether there exists an output, $\OUT$, that satisfies the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   Given the function data $\mZ = (\vL,\mY)$,  construct 
+\[
+\cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \} = \text{ set of solutions consistent with function data}
+\]
+Then
+\[
+\STOP(\veps,\mZ) = \begin{cases} 
+	(\OUT,\ttrue), & 
+	\exists \OUT \text{ such that } \CRIT(\OUT,g,\veps) = \ttrue \quad \forall g \in \cg(\mZ), \\
+	(\OUT,\tfalse), & \text{otherwise, where }\OUT \text{ may be the ``best'' so far}
+	\end{cases}
+\]
+
+
 
 \end{frame}
 
