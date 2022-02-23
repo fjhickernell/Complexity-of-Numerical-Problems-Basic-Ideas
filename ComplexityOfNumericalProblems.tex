@@ -48,6 +48,8 @@
 
 
 
+\DeclareMathOperator{\COST}{COST}
+\DeclareMathOperator{\STOP}{STOP}
 \DeclareMathOperator{\DATA}{DATA}
 \DeclareMathOperator{\SOL}{SOL}
 \DeclareMathOperator{\OUT}{OUT}
@@ -64,6 +66,8 @@
 \newcommand{\dataNjd}{\bigl(\hf(\vk_i)\bigr)_{i=1}^{n_{j^\dagger}}}
 \newcommand{\ERRN}{\ERR\bigl(\dataN,n\bigr)}
 \newcommand{\otod}{\ensuremath{1\mkern-4mu : \mkern-2mu d}}
+\newcommand{\ttrue}{\text{true}}
+\newcommand{\tfalse}{\text{false}}
 
 
 %\DeclareMathOperator{\app}{app}
@@ -126,36 +130,49 @@ Numerical solution, $\OUT$, should be be close to true solution, $\SOL(f)$, acco
 \begin{align*}
     \OUT & = \text{numerical solution} \in \cg \\
     \veps & = \text{scalar or vector of error tolerances} \in \ce \subseteq [0,\infty)^s\\
-    \CRIT: \cg \times \cg \times \ce \to \{\text{true}, \text{false}\}& = \text{error criterion} \\
-\intertext{\alert{Acceptable numerical solutions} satisfy $\CRIT(\OUT,\SOL(f),\veps) = \text{true}$. \endgraf
+    \CRIT: \cg \times \cg \times \ce \to \{\ttrue, \tfalse\}& = \text{error criterion} \\
+\intertext{\alert{Acceptable numerical solutions} satisfy $\CRIT(\OUT,\SOL(f),\veps) = \ttrue$. \endgraf
 In addition to knowledge about $f$ based on the definition of $\cf$, the algorithm constructing the numerical solution samples $f$, e.g., by generating function values or  derivative values:}
-    \Lambda: \cf \to \reals^t &= \text{set of allowable data functionals}
+    \Lambda: \cf \to \reals^t &= \text{set of allowable \alert{data operators}}
 \end{align*}
 A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.
 \end{frame}
 
 \section{Algorithms}
 
-\begin{frame}{Data Collection}
+\begin{frame}{Data Accumulation}
 
 \vspace{-4ex}
-Algorithms for solving numerical problems $(\SOL, \CRIT, \Lambda)$ must collect data about the input function by applying a sequence of data functionals.  The data collection operator $\DATA: \cf \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t}) $ is defined iteratively.  Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
+
+Now we discuss the components of  an algorithm to solve a numerical problem $(\SOL, \CRIT, \Lambda)$, which is assumed fixed.
+
+Algorithms must accumulate data about the input function by applying a sequence of data operators.  The \alert{data accumulation operator}
 \[
-\DATA(f,\mZ_0) = \begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n_1} & L_{n_1}(f) \end{pmatrix} = \mZ_{n_1}, \quad 
-\DATA(f,\mZ_{n_1}) = 
+\DATA: \cf \times  \ce \times\cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t}) 
+\]
+is defined iteratively.  Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
+\[
+\DATA(f,\veps, \mZ_0) = \begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n_1} & L_{n_1}(f) \end{pmatrix} = \mZ_{n_1}, \quad 
+\DATA(f, \veps,\mZ_{n_1}) = 
 \begin{pmatrix}\mZ_{n_1} \\ \begin{pmatrix} L_{n_1+1} & L_{n_1+1}(f) \\ \vdots & \vdots \\ L_{n_2} & L_{n_2}(f) \end{pmatrix}  \end{pmatrix} = \mZ_{n_2}, \quad \ldots
 \]
-where $0 < n_1 < n_2 < \cdots$, and $n_{\ell+1}$ depends on $\mZ_{n_\ell}$.
-
-$L_1, L_2, \ldots$ is the \alert{design}.
+where $0 < n_1 < n_2 < \cdots$, and $n_{\ell+1}$ depends on $\mZ_{n_\ell}$.  $L_1, L_2, \ldots$ is the \alert{design}, which in general may be \alert{adaptive}.
 
 \end{frame}
 
 \begin{frame}{Stopping Criteria}
+	
+The \alert{data based} stopping criterion
+\[
+\STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
+\]
+determines whether there exists an output, $\OUT$, that satisfies the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$
 
 \end{frame}
 
 \begin{frame}{Algorithm}
+	
+\vspace{-2ex}
 \begin{algorithm}[H]
 	\renewcommand{\thealgorithm}{}
 	\caption{Generic Algorithm Pattern}
@@ -163,11 +180,29 @@ $L_1, L_2, \ldots$ is the \alert{design}.
 		\PROB $(\SOL, \CRIT,\Lambda)$
 		\INPUT black-box function, $f$;  error tolerance, $\veps$
 		
-		\Ensure  $\CRIT(\OUT,\SOL(f),\veps) = \text{true}$
+		\Ensure  $\CRIT(\OUT,\SOL(f),\veps) = \ttrue$
 		
-		\State 
+		\State $\mZ = (\vL,\mY) \leftarrow (\emptyset, \emptyset)$
 		
-		\RETURN
+		\State $\text{done} \leftarrow \tfalse$
+		
+		\Repeat 
+		
+		\State Construct $\cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \}$ \\ \hfill \hfill $= \text{ set of solutions consistent with function data}$
+		
+		\If {$\exists \OUT \in \cg \text{ such that }  \CRIT(\OUT,g,\veps) = \ttrue \ \forall g \in \cg(\mZ)$}
+		
+		\State $\text{done} \leftarrow \ttrue$
+		
+		\Else 
+		
+		\State $\mZ = (\vL,\mY) \leftarrow \DATA(f,\mZ)$
+		
+		\EndIf
+		
+		\Until{$\text{done} = \ttrue$}
+		
+		\RETURN $\OUT$, $\COST(f,\veps) \leftarrow \text{\# elements in } \mY$
 	\end{algorithmic}
 \end{algorithm}	
 \end{frame}
