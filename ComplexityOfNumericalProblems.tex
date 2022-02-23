@@ -35,6 +35,19 @@
 \setlength{\arraycolsep}{0.5ex}
 
 
+
+\usepackage{algpseudocode}
+\usepackage{algorithm, algorithmicx}
+\algnewcommand\algorithmicproblem{\textbf{Problem:}}
+\algnewcommand\PROB{\item[\algorithmicproblem]}
+\algnewcommand\algorithmicparam{\textbf{Parameters:}}
+\algnewcommand\PARAM{\item[\algorithmicparam]}
+\algnewcommand\algorithmicinput{\textbf{Input:}}
+\algnewcommand\INPUT{\item[\algorithmicinput]}
+\algnewcommand\RETURN{\State \textbf{Return }}
+
+
+
 \DeclareMathOperator{\DATA}{DATA}
 \DeclareMathOperator{\SOL}{SOL}
 \DeclareMathOperator{\OUT}{OUT}
@@ -132,7 +145,7 @@ Algorithms for solving numerical problems $(\SOL, \CRIT, \Lambda)$ must collect 
 \DATA(f,\mZ_{n_1}) = 
 \begin{pmatrix}\mZ_{n_1} \\ \begin{pmatrix} L_{n_1+1} & L_{n_1+1}(f) \\ \vdots & \vdots \\ L_{n_2} & L_{n_2}(f) \end{pmatrix}  \end{pmatrix} = \mZ_{n_2}, \quad \ldots
 \]
-where $0 < n_1 < n_2 < \cdots$, and $n_{i+1}$ depends on $\mZ_{n_i}$.
+where $0 < n_1 < n_2 < \cdots$, and $n_{\ell+1}$ depends on $\mZ_{n_\ell}$.
 
 $L_1, L_2, \ldots$ is the \alert{design}.
 
@@ -142,6 +155,22 @@ $L_1, L_2, \ldots$ is the \alert{design}.
 
 \end{frame}
 
+\begin{frame}{Algorithm}
+\begin{algorithm}[H]
+	\renewcommand{\thealgorithm}{}
+	\caption{Generic Algorithm Pattern}
+	\begin{algorithmic}
+		\PROB $(\SOL, \CRIT,\Lambda)$
+		\INPUT black-box function, $f$;  error tolerance, $\veps$
+		
+		\Ensure  $\CRIT(\OUT,\SOL(f),\veps) = \text{true}$
+		
+		\State 
+		
+		\RETURN
+	\end{algorithmic}
+\end{algorithm}	
+\end{frame}
 
 
 \end{document}
