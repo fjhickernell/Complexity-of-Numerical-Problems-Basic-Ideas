@@ -68,6 +68,8 @@
 \newcommand{\otod}{\ensuremath{1\mkern-4mu : \mkern-2mu d}}
 \newcommand{\ttrue}{\text{true}}
 \newcommand{\tfalse}{\text{false}}
+\newcommand{\tolabs}{\varepsilon_{\text{a}}}
+\newcommand{\tolrel}{\varepsilon_{\text{r}}}
 
 
 %\DeclareMathOperator{\app}{app}
@@ -199,6 +201,24 @@ The data based stopping criterion is defined by
 
 \end{frame}
 
+
+\begin{frame}{Trapezpoidal Rule Integration Satisfying a Compound Criterion}
+For the integration problem above
+\begin{gather*}
+	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \qquad 
+	\cg  = \reals,  \qquad
+	\SOL(f) = \int_0^1 f(x) \, \dif x  \\
+	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
+		\tfalse, & \text{otherwise}, 
+		\end{cases} \\
+	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in \Omega\} = \text{function evaluations}\\
+\end{gather*}
+The following data accumulation and stopping criteria will succeed
+\begin{gather*}
+\end{gather*}
+
+
+\end{frame}
 
 
 \begin{frame}{Algorithm}
