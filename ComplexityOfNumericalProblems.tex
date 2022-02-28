@@ -150,11 +150,11 @@ Next we look at \alert{algorithms} to solve numerical problems.
 
 \vspace{-4ex}
 
-Now we discuss the components of  an algorithm to solve a numerical problem $(\SOL, \CRIT, \Lambda)$, which is assumed fixed.
+$(\SOL, \CRIT, \Lambda)$ is assumed fixed.
 
-Algorithms must accumulate data about the input function by applying a sequence of data operators.  The \alert{data accumulation operator}
+Algorithms accumulate data about the input function by applying a sequence of data operators, $L_1, L_2, \ldots$.  The \alert{data accumulator},
 \[
-\DATA: \cf \times  \ce \times\cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t}) 
+\DATA: \cf \times  \ce \times\cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t})
 \]
 is defined iteratively.  Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
 \[
@@ -168,7 +168,6 @@ where $0 < n_1 < n_2 < \cdots$, and $n_{\ell+1}$ depends on $\mZ_{n_\ell}$.
 
 
 \begin{frame}{Design}
-	
 	
 
 $\vL_n = (L_1, \ldots, L_n)^T$ is the \alert{design}, which may be \alert{adaptive}.
@@ -185,12 +184,15 @@ When the set of possible data operators, $\Lambda$, consists of function evaluat
 
 
 \begin{frame}{Stopping Criteria}
-	
+
+\vspace{-5ex}
 The \alert{data based} stopping criterion
 \[
 \STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
 \]
-determines whether there exists an output, $\OUT$, that satisfies the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   Given the function data $\mZ = (\vL,\mY)$,  construct 
+determines whether there exists an output, $\OUT$, satisfying the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   
+
+Given the function data $\mZ = (\vL,\mY)$,  construct 
 \[
 \cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \} = \text{ set of solutions consistent with function data}
 \]
@@ -199,7 +201,7 @@ The data based stopping criterion is defined by
 \STOP(\veps,\mZ) = \begin{cases} 
 	(\OUT,\ttrue), & 
 	\exists \OUT \text{ such that } \CRIT(\OUT,g,\veps) = \ttrue \quad \forall g \in \cg(\mZ), \\
-	(\OUT,\tfalse), & \text{otherwise ($\OUT$ may be the ``best'' so far or nil)}
+	(\OUT,\tfalse), & \text{otherwise ($\OUT$ arbitrary, may be ``best'' so far)}
 	\end{cases}
 \]
 
@@ -207,7 +209,10 @@ The data based stopping criterion is defined by
 
 
 \begin{frame}{Trapezpoidal Rule Integration}
+
+\vspace{-2ex}
 For the integration problem above with a \alert{compound error criterion}
+\vspace{-1ex}
 \begin{gather*}
 	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \qquad 
 	\cg  = \reals,  \qquad
@@ -217,8 +222,11 @@ For the integration problem above with a \alert{compound error criterion}
 		\end{cases} \\
 	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
 \end{gather*}
-The following data accumulation and stopping criterion will succeed
+We use a \alert{nonadaptive} data accumulator:
 \begin{gather*}
+\mZ_2 = \DATA(f,\veps,\mZ_{0})  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
+\mZ_3 = \DATA(f,\veps,\mZ_{2}) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
+\mZ_{2m+1} =  \begin{pmatrix} \mX_{2m+1} & f(\mX_{2m+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2m-1}) = \begin{pmatrix} \mX_{2m-1} & f(\mX_{2m-1}) \\ 1/2^m & f(1/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
 \end{gather*}
 
 
