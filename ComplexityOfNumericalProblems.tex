@@ -121,7 +121,9 @@ Examples include integration and root-finding
     \cg & = \reals &  \cg &= \text{set of all closed subsets of } [0,1]\\
     \SOL(f) &= \int_0^1 f(x) \, \dif x & \SOL(f) & = f^{-1}(0)
 \end{align*}
-Want to find a good \alert{numerical solution} to the mathematical problem $\SOL(f) = ?$
+Mathematical problems, $\SOL:\cf \to \cg$, are concerned with \alert{existence} or \alert{analytical solutions}.
+
+We want to find a good \alert{numerical solution}
 \end{frame}
 
 
@@ -138,6 +140,8 @@ In addition to knowledge about $f$ based on the definition of $\cf$, the algorit
     \Lambda: \cf \to \reals^t &= \text{set of allowable \alert{data operators}}
 \end{align*}
 A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.
+
+Next we look at \alert{algorithms} to solve numerical problems.
 \end{frame}
 
 \section{Algorithms}
@@ -202,8 +206,8 @@ The data based stopping criterion is defined by
 \end{frame}
 
 
-\begin{frame}{Trapezpoidal Rule Integration Satisfying a Compound Criterion}
-For the integration problem above
+\begin{frame}{Trapezpoidal Rule Integration}
+For the integration problem above with a \alert{compound error criterion}
 \begin{gather*}
 	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \qquad 
 	\cg  = \reals,  \qquad
@@ -211,9 +215,9 @@ For the integration problem above
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
 		\tfalse, & \text{otherwise}, 
 		\end{cases} \\
-	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in \Omega\} = \text{function evaluations}\\
+	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
 \end{gather*}
-The following data accumulation and stopping criteria will succeed
+The following data accumulation and stopping criterion will succeed
 \begin{gather*}
 \end{gather*}
 
