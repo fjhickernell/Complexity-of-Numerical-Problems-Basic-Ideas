@@ -221,7 +221,7 @@ For the integration problem above with a \alert{compound error criterion}
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
 		\tfalse, & \text{otherwise}, 
 		\end{cases} \\
-	 (\tolabs,\tolrel) \in (0,\infty) \times [0,1)\\
+	 (\tolabs,\tolrel) \in (0,\infty) \times [0,1), \qquad
 	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
 \end{gather*}
 We use a \alert{nonadaptive} data accumulator:
@@ -229,7 +229,7 @@ We use a \alert{nonadaptive} data accumulator:
 \begin{gather*}
 \mZ_2 = \DATA(f,\veps,\mZ_{0})  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
 \mZ_3 = \DATA(f,\veps,\mZ_{2}) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
-\mZ_{2^{m}+1} =  \begin{pmatrix} \mX_{2^{m}+1} & f(\mX_{2^{m}+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2^{m-1}+1}) = \begin{pmatrix} \mX_{2^{m-1}+1} & f(\mX_{2^{m-1}+1}) \\ 1/2^m & f(1/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
+\mZ_{2^{m}+1} =  \begin{pmatrix} \mX_{2^{m}+1} & f(\mX_{2^{m}+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2^{m-1}+1}) = \begin{pmatrix} \mX_{2^{m-1}+1} & f(\mX_{2^{m-1}+1}) \\ 1/2^m & f(1/2^m) \\ 3/2^m & f(3/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
 \end{gather*}
 
 \end{frame}
@@ -244,7 +244,8 @@ We use a \alert{nonadaptive} data accumulator:
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
 		\tfalse, & \text{otherwise},
 		\end{cases} \\
-		\text{\alert{trapezoidal rule}: } \TRAP(\mZ_{2^m+1}) = \frac 1{2^m} \left( \frac 12 f(0) + f(1/2^m) + \cdots + f(1 - 2^m) + \frac 12 f(1) \right)
+		\text{\alert{trapezoidal rule}: } 
+		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  \TRAP(\mZ_{2^m+1}) = \frac {1}{2}\TRAP(\mZ_{2^{m-1}+1}) + \frac 1{2^m} \left( f(1/2^m) + f(3/2^m) \cdots + f(1 - 2^m) \right) , \quad \text{for } m \in \naturals
 \end{gather*}
 
 
