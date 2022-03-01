@@ -48,6 +48,7 @@
 
 
 
+\DeclareMathOperator{\TRAP}{TRAP}
 \DeclareMathOperator{\COST}{COST}
 \DeclareMathOperator{\STOP}{STOP}
 \DeclareMathOperator{\DATA}{DATA}
@@ -226,11 +227,28 @@ We use a \alert{nonadaptive} data accumulator:
 \begin{gather*}
 \mZ_2 = \DATA(f,\veps,\mZ_{0})  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
 \mZ_3 = \DATA(f,\veps,\mZ_{2}) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
-\mZ_{2m+1} =  \begin{pmatrix} \mX_{2m+1} & f(\mX_{2m+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2m-1}) = \begin{pmatrix} \mX_{2m-1} & f(\mX_{2m-1}) \\ 1/2^m & f(1/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
+\mZ_{2^{m}+1} =  \begin{pmatrix} \mX_{2^{m}+1} & f(\mX_{2^{m}+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2^{m-1}+1}) = \begin{pmatrix} \mX_{2^{m-1}+1} & f(\mX_{2^{m-1}+1}) \\ 1/2^m & f(1/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
 \end{gather*}
 
 
 \end{frame}
+
+\begin{frame}{Trapezpoidal Rule Integration}
+
+\vspace{-2ex}
+\begin{gather*}
+	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \quad 
+	\cg  = \reals,  \quad
+	\SOL(f) = \int_0^1 f(x) \, \dif x, \quad   \Lambda = \text{function evaluations} \\
+	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
+		\tfalse, & \text{otherwise},
+		\end{cases} \\
+		\text{\alert{trapezoidal rule}: } \TRAP(\mZ_{2^m+1}) = \frac 1n \left( \frac 12 f(0) + f(1/2^m) + \cdots + f(1 - 2^m) + \frac 12 f(1) \right)
+\end{gather*}
+
+
+\end{frame}
+
 
 
 \begin{frame}{Algorithm}
