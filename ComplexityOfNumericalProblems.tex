@@ -234,7 +234,7 @@ We use a \alert{nonadaptive} data accumulator:
 
 \end{frame}
 
-\begin{frame}{Trapezpoidal Rule Integration}
+\begin{frame}{Trapezpoidal Rule Integration cont'd}
 
 \vspace{-2ex}
 \begin{gather*}
@@ -245,7 +245,8 @@ We use a \alert{nonadaptive} data accumulator:
 		\tfalse, & \text{otherwise},
 		\end{cases} \\
 		\text{\alert{trapezoidal rule}: } 
-		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  \TRAP(\mZ_{2^m+1}) = \frac {1}{2}\TRAP(\mZ_{2^{m-1}+1}) + \frac 1{2^m} \left( f(1/2^m) + f(3/2^m) \cdots + f(1 - 2^m) \right) , \quad \text{for } m \in \naturals
+		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  \TRAP(\mZ_{2^m+1}) = \frac {1}{2}\TRAP(\mZ_{2^{m-1}+1}) + \frac 1{2^m} \left( f(1/2^m) + f(3/2^m) \cdots + f(1 - 2^m) \right) , \quad \text{for } m \in \naturals \\
+		\cg(\mZ_{2^m+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{2^m+1})} \le 1/??4^m\} \quad \text{\cite[(7.??)]{BraPet11a}}
 \end{gather*}
 
 
@@ -282,118 +283,11 @@ We use a \alert{nonadaptive} data accumulator:
 \end{algorithm}	
 \end{frame}
 
+\printbibliography
 
 \end{document}
 
 
-\begin{frame}{Bayesian Cubature Enhancements}
-
-Investigators: Fred Hickernell, Jagadeeswaran Rathinavel, Claude Hall
-
-\url{https://www.overleaf.com/project/5ded59976c7d0b00011f57d6}
-
-\end{frame}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Notes, Related Preprints, or Numerical Experiments}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}{Duality Between Reproducing Kernels and Measures}
-Investigators: Fred Hickernell, Claude Hall
-
-\url{https://www.overleaf.com/2459845262nsvdsvhrxqwp}
-    
-    If you have a reproducing kernel, $K$, then it seems to induce an inner product on a space of (distributions of) measures.
-\end{frame}
-
-
-\begin{frame}{Professor Kai-Tai Fang's Problem}
-
-Investigators: 
-
-\url{https://www.overleaf.com/1816161655sqmpvyqsbshs}
-   
-\end{frame}
-
-
-\begin{frame}{Convergence Rate for Variable Transformations of QMC Points}
-
-Investigators: Claude Hall
-
-\url{https://www.overleaf.com/5133543839fmgfwqbtmrbv}
-    
-    A smooth integrand integrated against the Gaussian distribution does not seem to exhibit $\Order(n^{-3/2})$ convergence using scrambled Sobol'
-    
-    
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Dreams}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{Optimal Continuous Design for RKHS Function Approximation}
-
-Investigators: 
-
-\url{}
-   
-\end{frame}
-
-
-\begin{frame}{Bayesian Cubature for Higher Order Nets}
-   
-Investigators: 
-
-\end{frame}
-
-
-\begin{frame}{QMC/quasirandom nonparametric statistics}
-   
-Investigators: Mike McCourt
-
-What sort of statements can be said about, e.g., medians and percentiles of distributions sampled quasirandomly (instead of the mean, which is the integral)?  Art wrote this ... maybe related?  https://arxiv.org/pdf/2111.12676.pdf
-If we can say anything about this, it would be cool
-
-
-\end{frame}
-
-
-\begin{frame}{GAAPY Prototype}
-
-
-Investigators: Sou-Cheng Choi, Yuhan Ding, Fred Hickernell, Xin Tong
-
-\url{}
-
-
-\end{frame}
-
-
-
-\begin{frame}{Parametric Integration}
-
-
-Investigators: Fred Hickernell
-
-\url{https://www.overleaf.com/9869163733ggdzybqpxyrm}
-
-
-\end{frame}
-
-
-\end{document}
 
 
 \chapter{Various Error Criteria} \label{chap:relerror}
