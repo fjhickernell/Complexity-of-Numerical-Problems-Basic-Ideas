@@ -147,6 +147,30 @@ Next we look at \alert{algorithms} to solve numerical problems.
 
 \section{Algorithms}
 
+
+\begin{frame}{Data}
+	
+	\vspace{-5ex}
+	$(\SOL, \CRIT, \Lambda)$ is assumed fixed.
+	
+	Algorithms work with function data that takes the form
+	\[
+	\mZ_n 
+	= \begin{pmatrix} \vL_n & \mY_n \end{pmatrix}
+	=  \begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n} & L_{n}(f) \end{pmatrix} 
+	\in \Lambda^n \times \reals^{n\times t}
+	\]
+	$\vL_n$ is the \alert{design}.  We sometimes drop the subscript $n$.
+	
+	When the set of possible data operators, $\Lambda$, consists of function evaluations, then we may represent the design by the data sites, $\mX_n = (\vx_1, \ldots, \vx_n)^T \in \Omega^n \subseteq \reals^{n \times d}$:
+	\[
+	\mZ_{n} = \begin{pmatrix} \mX & f(\mX_{n}) \end{pmatrix} \in  \reals^{n \times (d+t)}
+	\]
+	
+	
+\end{frame}
+
+
 \begin{frame}{Stopping Criteria}
 
 \vspace{-5ex}
