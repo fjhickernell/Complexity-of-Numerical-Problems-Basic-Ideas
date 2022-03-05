@@ -147,6 +147,32 @@ Next we look at \alert{algorithms} to solve numerical problems.
 
 \section{Algorithms}
 
+\begin{frame}{Stopping Criteria}
+
+\vspace{-5ex}
+The \alert{data based} stopping criterion
+\[
+\STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
+\]
+determines whether there exists an output, $\OUT$, satisfying the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   
+
+Given the function data $\mZ = (\vL,\mY)$,  construct 
+\[
+\cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \} = \text{ set of solutions consistent with function data}
+\]
+The data based stopping criterion is defined by
+\[
+\STOP(\veps,\mZ) = \begin{cases} 
+	(\OUT,\ttrue), & 
+	\exists \OUT \text{ such that } \CRIT(\OUT,g,\veps) = \ttrue \quad \forall g \in \cg(\mZ), \\
+	(\OUT,\tfalse), & \text{otherwise ($\OUT$ arbitrary, may be ``best'' so far)}
+	\end{cases}
+\]
+
+\end{frame}
+
+
+
 \begin{frame}{Data Accumulation}
 
 \vspace{-4ex}
@@ -183,30 +209,6 @@ When the set of possible data operators, $\Lambda$, consists of function evaluat
 	
 \end{frame}
 
-
-\begin{frame}{Stopping Criteria}
-
-\vspace{-5ex}
-The \alert{data based} stopping criterion
-\[
-\STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
-\]
-determines whether there exists an output, $\OUT$, satisfying the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   
-
-Given the function data $\mZ = (\vL,\mY)$,  construct 
-\[
-\cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \} = \text{ set of solutions consistent with function data}
-\]
-The data based stopping criterion is defined by
-\[
-\STOP(\veps,\mZ) = \begin{cases} 
-	(\OUT,\ttrue), & 
-	\exists \OUT \text{ such that } \CRIT(\OUT,g,\veps) = \ttrue \quad \forall g \in \cg(\mZ), \\
-	(\OUT,\tfalse), & \text{otherwise ($\OUT$ arbitrary, may be ``best'' so far)}
-	\end{cases}
-\]
-
-\end{frame}
 
 
 \begin{frame}{Trapezpoidal Rule Integration}
