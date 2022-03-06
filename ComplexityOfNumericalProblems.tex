@@ -51,7 +51,7 @@
 \DeclareMathOperator{\TRAP}{TRAP}
 \DeclareMathOperator{\COST}{COST}
 \DeclareMathOperator{\STOP}{STOP}
-\DeclareMathOperator{\DATA}{DATA}
+\DeclareMathOperator{\DATA}{ACC}
 \DeclareMathOperator{\SOL}{SOL}
 \DeclareMathOperator{\OUT}{OUT}
 \DeclareMathOperator{\CRIT}{CRIT}
@@ -176,20 +176,20 @@ Next we look at \alert{algorithms} to solve numerical problems.
 \vspace{-5ex}
 The \alert{data based} stopping criterion
 \[
-\STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times \{\ttrue, \tfalse \}
+\STOP:  \ce  \times \cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \to \cg \times 2^\cg \times \{\ttrue, \tfalse \}
 \]
 determines whether there exists an output, $\OUT$, satisfying the error criterion, $\CRIT(\OUT,\SOL(f),\veps)$.   
 
-Given the function data $\mZ = (\vL,\mY)$,  construct 
+Given the function data $\mZ =\begin{pmatrix}\vL & \mY\end{pmatrix}$,  construct 
 \[
 \cg(\mZ) \supseteq \{\SOL(f) :   f \in \cf, \ \vL(f) = \mY   \} = \text{ set of solutions consistent with function data}
 \]
 The data based stopping criterion is defined by
 \[
 \STOP(\veps,\mZ) = \begin{cases} 
-	(\OUT,\ttrue), & 
+	(\OUT,\cg(\mZ), \ttrue), & 
 	\exists \OUT \text{ such that } \CRIT(\OUT,g,\veps) = \ttrue \quad \forall g \in \cg(\mZ), \\
-	(\OUT,\tfalse), & \text{otherwise ($\OUT$ arbitrary, may be ``best'' so far)}
+	(\OUT,\cg(\mZ),\tfalse), & \text{otherwise ($\OUT$ arbitrary, may be ``best'' so far)}
 	\end{cases}
 \]
 
@@ -201,38 +201,28 @@ The data based stopping criterion is defined by
 
 \vspace{-4ex}
 
-$(\SOL, \CRIT, \Lambda)$ is assumed fixed.
-
-Algorithms accumulate data about the input function by applying a sequence of data operators, $L_1, L_2, \ldots$.  The \alert{data accumulator},
+Function data $\mZ =\begin{pmatrix}\vL & \mY\end{pmatrix}$ is accumulated iteratively via the \alert{data accumulator},
 \[
 \DATA: \cf \times  \ce \times\cup_{n \in \natzero} (\Lambda^n \times \reals^{n\times t} ) \times 2^\cg\to  \cup_{n \in \naturals} (\Lambda^n \times \reals^{n\times t})
 \]
-is defined iteratively.  Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
-\[
-\DATA(f,\veps, \mZ_0) = \begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n_1} & L_{n_1}(f) \end{pmatrix} = \mZ_{n_1}, \quad 
-\DATA(f, \veps,\mZ_{n_1}) = 
-\begin{pmatrix}\mZ_{n_1} \\ \begin{pmatrix} L_{n_1+1} & L_{n_1+1}(f) \\ \vdots & \vdots \\ L_{n_2} & L_{n_2}(f) \end{pmatrix}  \end{pmatrix} = \mZ_{n_2}, \quad \ldots
-\]
-where $0 < n_1 < n_2 < \cdots$, and $n_{\ell+1}$ depends on $\mZ_{n_\ell}$.  
+Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\times t}$.  Then,
+\begin{gather*}
+\DATA(f,\veps, \mZ_0, \cg) = 
+\begin{pmatrix} L_{1} & L_{1}(f) \\ \vdots & \vdots \\ L_{n_1} & L_{n_1}(f) \end{pmatrix} 
+= \begin{pmatrix}
+	\vL_{n_1} & \mY_{n_1}
+\end{pmatrix}
+= \mZ_{n_1}, \\ 
+\DATA(f, \veps,\mZ_{n_1}, \cg(\mZ_{n_1})) = 
+\begin{pmatrix}\mZ_{n_1} \\ \begin{pmatrix} L_{n_1+1} & L_{n_1+1}(f) \\ \vdots & \vdots \\ L_{n_2} & L_{n_2}(f) \end{pmatrix}  \end{pmatrix} 
+= \begin{pmatrix}
+	\vL_{n_2} & \mY_{n_2}
+\end{pmatrix}
+= \mZ_{n_2}, \quad \ldots
+\end{gather*}
+where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, depend strongly on  $\mZ_{n_\ell}$ and $ \cg(\mZ_{n_\ell})$
 
 \end{frame}
-
-
-\begin{frame}{Design}
-	
-
-$\vL_n = (L_1, \ldots, L_n)^T$ is the \alert{design}, which may be \alert{adaptive}.
-	
-When the set of possible data operators, $\Lambda$, consists of function evaluations, then we may represent the design by the data sites, $\mX_n = (\vx_1, \ldots, \vx_n)^T \in \Omega^n \subseteq \reals^{n \times d}$.
-
-
-\[
-\DATA(f,\veps,\mZ_{n_{\ell-1}}) = \mZ_{n_{\ell}} = \bigl(\mX_{n_{\ell}}, f(\mX_{n_{\ell}}) \bigr)  \in  \reals^{n_\ell \times (d+t)}
-\]
-
-	
-\end{frame}
-
 
 
 \begin{frame}{Trapezpoidal Rule Integration}
