@@ -220,7 +220,7 @@ Let $\mZ_0 = (\emptyset, \emptyset)$ and $\mZ_n \in \Lambda^n \times \reals^{n\t
 \end{pmatrix}
 = \mZ_{n_2}, \quad \ldots
 \end{gather*}
-where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, depend strongly on  $\mZ_{n_\ell}$ and $ \cg(\mZ_{n_\ell})$
+where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, depend  on $ \cg(\mZ_{n_\ell})$.
 
 \end{frame}
 
@@ -240,12 +240,14 @@ For the integration problem above with a \alert{compound error criterion}
 	 (\tolabs,\tolrel) \in (0,\infty) \times [0,1), \qquad
 	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
 \end{gather*}
-We use a \alert{nonadaptive} data accumulator:
+Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \mX & f(\mX) \end{pmatrix}$:
 \vspace{-1ex}
 \begin{gather*}
-\mZ_2 = \DATA(f,\veps,\mZ_{0})  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
-\mZ_3 = \DATA(f,\veps,\mZ_{2}) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
-\mZ_{2^{m}+1} =  \begin{pmatrix} \mX_{2^{m}+1} & f(\mX_{2^{m}+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{2^{m-1}+1}) = \begin{pmatrix} \mX_{2^{m-1}+1} & f(\mX_{2^{m-1}+1}) \\ 1/2^m & f(1/2^m) \\ 3/2^m & f(3/2^m) \\ \vdots & \vdots \\ 1 - 1/2^m & f(1 - 1/2^m)\end{pmatrix} \quad \text{for } m \in \naturals
+\mZ_2 = \DATA(f,\veps,\mZ_{0},\cg)  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
+\mZ_3 = \DATA(f,\veps,\mZ_{2},\cg(\mZ_{2})) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
+{\small 
+	\mZ_{2n+1} =  \begin{pmatrix} \mX_{2n+1} & f(\mX_{2n+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{n+1},\cg(\mZ_{n+1})) = \begin{pmatrix} \mX_{n+1} & f(\mX_{n+1}) \\ 1/(2n)& f(1/(2n)) \\ 3/(2n) & f(3/(2n)) \\ \vdots & \vdots \\ 1 - 1/(2n) & f(1 - 1/(2n))\end{pmatrix}  \text{ for } \log_2(n) \in \natzero
+}
 \end{gather*}
 
 \end{frame}
