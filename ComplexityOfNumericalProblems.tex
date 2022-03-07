@@ -120,13 +120,30 @@ Define a (continuous) \alert{mathematical problem} as follows:
 \end{align*}
 Examples include integration and root-finding
 \begin{align*}
-   \cf &= \{f \in C[0,1] : \norm[2]{f''} \le 1\} & \cf &= \{f \in C[0,1] : f(0) f(1) \le 0 \}\\
+   \cf &=  C[0,1] & \cf &= C[0,1]\\
     \cg & = \reals &  \cg &= \text{set of all closed subsets of } [0,1]\\
     \SOL(f) &= \int_0^1 f(x) \, \dif x & \SOL(f) & = f^{-1}(0)
 \end{align*}
-Mathematical problems, $\SOL:\cf \to \cg$, are concerned with \alert{existence} or \alert{analytical solutions}.
+\end{frame}
 
-We want to find a good \alert{numerical solution}
+\begin{frame}{Mathematical Problems}
+	
+	\vspace{-4ex}
+For mathematical problems, $\SOL:\cf \to \cg$, one often seeks to prove \alert{existence}
+	\begin{align*}
+   		\cf &=  C[0,1] & \cf &= C[0,1]\\
+		\cg & = \reals &  \cg &= \text{set of all closed subsets of } [0,1]\\
+		\SOL(f) & \text{ exists} & \SOL(f) & \text{ exists, even if it is the null set} \\
+	\intertext{or \alert{analytical solutions} via symbolic computation \cite{Coh03a}.  for certain members of $\cf$}
+			\multispan2{$\SOL(x \mapsto x \exp(-2x)) = \frac {1 - 3 \exp(-2)}4$} &
+			\multispan2{$\SOL(x \mapsto 4 x^2 - 6x + 1)  = \left \{ \frac {3 \pm \sqrt{5}}{4}  \right\}$}
+	\intertext{But analytical solutions, $\SOL(f)$ may \alert{not be available} if $f$ is too complex. Then we need good \alert{numerical solutions}}
+			\multispan2{\hfil$\SOL(\text{black-box}) =?$\hfil} &
+            \multispan2{\hfil$\SOL(\text{black-box}) =?$\hfil} 
+	\end{align*}
+where we discover information about the input function $\text{black-box}(\cdot)$---apart from its membership in $\cf$---through  \alert {data operators} applied to  $\text{black-box}(\cdot)$.
+	
+	
 \end{frame}
 
 
@@ -139,7 +156,7 @@ Numerical solution, $\OUT$, should be be close to true solution, $\SOL(f)$, acco
     \veps & = \text{scalar or vector of error tolerances} \in \ce \subseteq [0,\infty)^s\\
     \CRIT: \cg \times \cg \times \ce \to \{\ttrue, \tfalse\}& = \text{error criterion} \\
 \intertext{\alert{Acceptable numerical solutions} satisfy $\CRIT(\OUT,\SOL(f),\veps) = \ttrue$. \endgraf
-In addition to knowledge about $f$ based on the definition of $\cf$, the algorithm constructing the numerical solution samples $f$, e.g., by generating function values or  derivative values:}
+In addition to knowledge about $f$ based on the definition of $\cf$, the algorithm constructing the numerical solution \alert{samples} $f$, e.g., by generating function values or  derivative values:}
     \Lambda: \cf \to \reals^t &= \text{set of allowable \alert{data operators}}
 \end{align*}
 A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.
