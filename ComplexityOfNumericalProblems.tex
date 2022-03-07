@@ -103,6 +103,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\part{Problems and Algorithms}
 \section{Problems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -245,16 +247,14 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 \begin{gather*}
 \mZ_2 = \DATA(f,\veps,\mZ_{0},\cg)  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
 \mZ_3 = \DATA(f,\veps,\mZ_{2},\cg(\mZ_{2})) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
-{\small 
-	\mZ_{2n+1} =  \begin{pmatrix} \mX_{2n+1} & f(\mX_{2n+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{n+1},\cg(\mZ_{n+1})) = \begin{pmatrix} \mX_{n+1} & f(\mX_{n+1}) \\ 1/(2n)& f(1/(2n)) \\ 3/(2n) & f(3/(2n)) \\ \vdots & \vdots \\ 1 - 1/(2n) & f(1 - 1/(2n))\end{pmatrix}  \text{ for } \log_2(n) \in \natzero
-}
+	\mZ_{n+1} =  \begin{pmatrix} \mX_{n+1} & f(\mX_{n+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{n/2+1},\cg(\mZ_{n/2+1})) = \begin{pmatrix} \mX_{n/2+1} & f(\mX_{n/2+1}) \\ 1/n& f(1/n) \\ 3/n & f(3/n) \\ \vdots & \vdots \\ 1 - 1/n & f(1 - 1/n)\end{pmatrix}  \text{ for } \log_2(n) \in \naturals
 \end{gather*}
 
 \end{frame}
 
 \begin{frame}{Trapezpoidal Rule Integration cont'd}
 
-\vspace{-2ex}
+\vspace{-6ex}
 \begin{gather*}
 	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \quad 
 	\cg  = \reals,  \quad
@@ -263,10 +263,18 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 		\tfalse, & \text{otherwise},
 		\end{cases} \\
 		\text{\alert{trapezoidal rule}: } 
-		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  \TRAP(\mZ_{2^m+1}) = \frac {1}{2}\TRAP(\mZ_{2^{m-1}+1}) + \frac 1{2^m} \left( f(1/2^m) + f(3/2^m) \cdots + f(1 - 2^m) \right)  \quad \text{for } m \in \naturals,\\
-		\cg(\mZ_{2^m+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{2^m+1})} \le 1/??4^m\} \quad \text{\cite[(7.??)]{BraPet11a}}, \\ 
+		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  
+		\TRAP(\mZ_{n+1}) = \frac {1}{2}\TRAP(\mZ_{n/2+1}) + \frac 1{n} \left( f(1/n) + f(3/n) \cdots + f(1 -1/n) \right)  \quad \log_2(n) \in \naturals,\\
+		\cg(\mZ_{n+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{n+1})} \le \ERR_n\},  \quad \ERR_n =  1/??n^2, \qquad \text{\cite[(7.??)]{BraPet11a}}, \\ 
+		\OUT = \TRAP(\mZ_{n+1}) + \frac 12 \left[\max(\tolabs,\tolrel\abs{\TRAP(\mZ_{n+1})- \ERR_n}) - \max(\tolabs,\tolrel \abs{\TRAP(\mZ_{n+1}) +\ERR_n}) \right] \\
+	\STOP(\veps,\mZ_{n+1}) 
+	= \begin{cases} 
+		(\OUT,\cg(\mZ_{n+1}), \ttrue), & 
+		2\ERR_n \le  \max(\tolabs,\tolrel\abs{\TRAP(\mZ_{n+1})- \ERR_n}) \\
+		& \qquad + \max(\tolabs,\tolrel\abs{\TRAP(\mZ_{n+1}) +\ERR_n}), \\
+		(\OUT,\cg(\mZ_{n+1}),\tfalse), & \text{otherwise}.
+	\end{cases}
 \end{gather*}
-
 
 \end{frame}
 
@@ -301,7 +309,24 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 \end{algorithm}	
 \end{frame}
 
-\printbibliography
+\part{Cost and Complexity}
+\section{Algorithm Cost}
+\begin{frame}{Dummy Frame}
+
+\end{frame}
+
+
+\section{Problem Complexity}
+
+
+\part{Tractability}
+
+
+\part{References}
+\begin{frame}{References}
+	\printbibliography
+\end{frame}
+
 
 \end{document}
 
