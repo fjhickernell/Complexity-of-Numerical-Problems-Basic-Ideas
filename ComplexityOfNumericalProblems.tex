@@ -130,7 +130,7 @@ Examples include integration and root-finding
 \end{align*}
 \end{frame}
 
-\begin{frame}{Mathematical Problems}
+\begin{frame}{Existence and Analytic Solutions}
 \squeezeeqspace{6pt}
 
 \vspace{-4ex}
@@ -150,7 +150,6 @@ where we discover information about the input function $\text{black-box}(\cdot)$
 	
 	
 \end{frame}
-
 
 \begin{frame}{Numerical Problems}
 
@@ -248,7 +247,7 @@ where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, d
 
 \end{frame}
 
-
+\section{Examples}
 \begin{frame}{Trapezpoidal Rule Integration}
 
 \vspace{-2ex}
@@ -289,6 +288,8 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 		\TRAP(\mZ_{n+1}) = \frac {1}{2}\TRAP(\mZ_{n/2+1}) + \frac 1{n} \left( f(1/n) + f(3/n) \cdots + f(1 -1/n) \right)  \quad \log_2(n) \in \naturals,\\
 		\cg(\mZ_{n+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{n+1})} \le \ERR_n\},  \quad \ERR_n =  1/??n^2, \qquad \text{\cite[(7.??)]{BraPet11a}}, \\ 
 		\OUT = \TRAP(\mZ_{n+1}) + \frac 12 \left[\max(\tolabs,\tolrel\abs{\TRAP(\mZ_{n+1})- \ERR_n}) - \max(\tolabs,\tolrel \abs{\TRAP(\mZ_{n+1}) +\ERR_n}) \right] \\
+		\text{minimizes }  \max_{I \in \cg(\mZ_{n+1})} \bigl[ \abs{I - \OUT} - \max(\tolabs,\tolrel \abs{I}) 
+		\bigr ] \qquad \OUT \text{ may differ from } \TRAP(\mZ_{n+1}) \\
 	\STOP(\veps,\mZ_{n+1}) 
 	= \begin{cases} 
 		(\OUT,\cg(\mZ_{n+1}), \ttrue), & 
@@ -299,7 +300,6 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 \end{gather*}
 
 \end{frame}
-
 
 
 \begin{frame}{Algorithm}
@@ -330,6 +330,22 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 	\end{algorithmic}
 \end{algorithm}	
 \end{frame}
+
+
+\section{No Algorithms Exist}
+
+\begin{frame}{Choices of $\cf$}
+	\vspace{-5ex}
+	The set of input functions, $\cf$, chosen to prove \alert{existence} or to construct \alert{analytical solutions}.  For numerical problems $\cf$ should be chosen
+	\begin{itemize}
+		\item Often as a \alert{ball} or \alert{cone}, usually not a vector space
+		\item Small enough so that an algorithm \alert{exists} to solve $(\SOL,\CRIT,\Lambda)$
+		\item Small enough so that algorithms exist with the desired  \alert{computational cost}
+		\item Large enough to include the input functions  expected in \alert{practice}
+	\end{itemize}
+	
+\end{frame}
+
 
 \part{Cost and Complexity}
 \section{Algorithm Cost}
