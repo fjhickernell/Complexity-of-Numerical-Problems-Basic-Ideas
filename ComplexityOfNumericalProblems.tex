@@ -116,7 +116,7 @@
 \begin{frame}{Mathematical Problems}
 
 \vspace{-5ex}
-Define a (continuous) \alert{mathematical problem} as follows:
+Define a (continuous) \alert{mathematical problem} as
 \begin{align*}
     \cf & = \text{set of input functions defined on the domain } \Omega\\
     \cg & = \text{set of possible solutions} \\
@@ -134,19 +134,19 @@ Examples include integration and root-finding
 \squeezeeqspace{6pt}
 
 \vspace{-4ex}
-For mathematical problems, $\SOL:\cf \to \cg$, one often seeks to prove \alert{existence}
+For mathematical problems, $\SOL:\cf \to \cg$, one may prove \alert{existence}
 	\begin{align*}
    		\cf &=  C[0,1] & \cf &= C[0,1]\\
 		\cg & = \reals &  \cg &= \text{set of all closed subsets of } [0,1]\\
 		\SOL(f) & \text{ exists} & \SOL(f) & \text{ exists, even if it is the null set}
-	\intertext{One may seek \alert{analytical solutions} via symbolic computation \cite{Coh03a} for some \alert{smaller $\cf$} than that which admits existence:}
+	\intertext{One may construct \alert{analytical solutions} via symbolic computation \cite{Coh03a} for some \alert{smaller $\cf$} than that which admits existence:}
 			\multispan2{$\SOL(x \mapsto x \exp(-2x)) = \frac {1 - 3 \exp(-2)}4$} &
 			\multispan2{$\SOL(x \mapsto 4 x^2 - 6x + 1)  = \left \{ \frac {3 \pm \sqrt{5}}{4}  \right\}$}
-	\intertext{But analytical solutions, $\SOL(f)$ may \alert{not be available} if $f$ is too complex. Then we need good \alert{numerical solutions}}
+	\intertext{Analytical solutions, $\SOL(f)$ may \alert{not be available} if $f$ is too complex. Then we need \alert{numerical solutions}}
 			\multispan2{\hfil$\SOL(\text{black-box}) =?$\hfil} &
             \multispan2{\hfil$\SOL(\text{black-box}) =?$\hfil} 
 	\end{align*}
-where we discover information about the input function $\text{black-box}(\cdot)$---apart from its membership in $\cf$---through  \alert {data operators} applied to  $\text{black-box}(\cdot)$.
+We discover information about input function $\text{black-box}(\cdot)$---apart from its membership in $\cf$---through  \alert {data operators} applied to  $\text{black-box}(\cdot)$.
 	
 	
 \end{frame}
@@ -154,7 +154,7 @@ where we discover information about the input function $\text{black-box}(\cdot)$
 \begin{frame}{Numerical Problems}
 
 \vspace{-5ex}
-Numerical solution, $\OUT$, should be be close to true solution, $\SOL(f)$, according to an error criterion, $\CRIT$, and tolerance, $\veps$:
+For mathematical problem $\SOL:\cf \to \cg$, numerical solution, $\OUT$, should be be close to true solution, $\SOL(f)$, according to an error criterion, $\CRIT$, and tolerance, $\veps$:
 \begin{align*}
     \OUT & = \text{numerical solution} \in \cg \\
     \veps & = \text{scalar or vector of error tolerances} \in \ce \subseteq [0,\infty)^s\\
@@ -165,8 +165,21 @@ In addition to knowledge about $f$ based on the definition of $\cf$, the algorit
 \end{align*}
 A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.
 
-Next we look at \alert{algorithms} to solve numerical problems.
 \end{frame}
+
+\begin{frame}{Choosing $\cf$ for Numerical Problems}
+	\vspace{-5ex}
+	The set of input functions, $\cf$, chosen to prove \alert{existence} or to construct \alert{analytical solutions} are different from the $\cf$ for numerical problems.  These latter $\cf$ should be
+	\begin{itemize}
+		\item Often a \alert{ball} or \alert{cone}, usually not a vector space
+		\item Small enough so that an algorithm \alert{exists} to solve $(\SOL,\CRIT,\Lambda)$
+		\item Small enough to admit algorithms with the desired  \alert{computational cost}
+		\item Large enough to include the input functions  expected in \alert{practice}
+	\end{itemize}
+Think \alert{Goldilocks}
+	
+\end{frame}
+
 
 \section{Algorithms}
 
@@ -174,6 +187,7 @@ Next we look at \alert{algorithms} to solve numerical problems.
 \begin{frame}{Data}
 	
 	\vspace{-5ex}
+	Now we look at \alert{algorithms} to solve numerical problems.
 	$(\SOL, \CRIT, \Lambda)$ is assumed fixed.
 	
 	Algorithms work with function data that takes the form
@@ -336,9 +350,9 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 
 \begin{frame}{Choices of $\cf$}
 	\vspace{-5ex}
-	The set of input functions, $\cf$, chosen to prove \alert{existence} or to construct \alert{analytical solutions}.  For numerical problems $\cf$ should be chosen
+	The set of input functions, $\cf$, chosen to prove \alert{existence} or to construct \alert{analytical solutions} are different from the $\cf$ for numerical problems.  These $\cf$ should 
 	\begin{itemize}
-		\item Often as a \alert{ball} or \alert{cone}, usually not a vector space
+		\item Often be a \alert{ball} or \alert{cone}, usually not a vector space
 		\item Small enough so that an algorithm \alert{exists} to solve $(\SOL,\CRIT,\Lambda)$
 		\item Small enough so that algorithms exist with the desired  \alert{computational cost}
 		\item Large enough to include the input functions  expected in \alert{practice}
@@ -346,6 +360,9 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 	
 \end{frame}
 
+\begin{frame}{Dummy Frame}
+	
+\end{frame}
 
 \part{Cost and Complexity}
 \section{Algorithm Cost}
