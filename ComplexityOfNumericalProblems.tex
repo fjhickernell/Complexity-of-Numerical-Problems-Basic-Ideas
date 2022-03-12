@@ -277,13 +277,13 @@ For the integration problem above with a \alert{compound error criterion}
 	 (\tolabs,\tolrel) \in (0,\infty) \times [0,1), \qquad
 	 \Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
 \end{gather*}
-Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \mX & f(\mX) \end{pmatrix}$:
+\uncover<2->{Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \mX & f(\mX) \end{pmatrix}$:
 \vspace{-1ex}
 \begin{gather*}
 \mZ_2 = \DATA(f,\veps,\mZ_{0},\cg)  = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \end{pmatrix},  \quad
 \mZ_3 = \DATA(f,\veps,\mZ_{2},\cg(\mZ_{2})) = \begin{pmatrix} 0 & f(0) \\ 1 & f(1) \\ 1/2 & f(1/2)\end{pmatrix}, \\
 	\mZ_{n+1} =  \begin{pmatrix} \mX_{n+1} & f(\mX_{n+1}) \end{pmatrix} = \DATA(f,\veps,\mZ_{n/2+1},\cg(\mZ_{n/2+1})) = \begin{pmatrix} \mX_{n/2+1} & f(\mX_{n/2+1}) \\ 1/n& f(1/n) \\ 3/n & f(3/n) \\ \vdots & \vdots \\ 1 - 1/n & f(1 - 1/n)\end{pmatrix}  \text{ for } \log_2(n) \in \naturals
-\end{gather*}
+\end{gather*}}
 
 \end{frame}
 
@@ -355,15 +355,15 @@ Use a \alert{nonadaptive} data accumulator to construct $\mZ = \begin{pmatrix} \
 	\begin{gather*}
 		\cg \text{ is a normed space}\qquad \SOL \text{ is homogeneous} \qquad \Lambda \subseteq \text{all homogeneous functionals}\\
 		\cf = \text{cone of input functions with the property that for all $\vL_n \in \Lambda^n$ there exists an $h \in \cf$ } \\
-		 \text{with $\vL_n(h) = \vzero_n$ and $\norm[\cg]{\SOL(h)} > 0$, 
-			e.g.,  an $\infty$-dimensional vector space} \\
+		 \text{with $\vL_n(h) = \vzero_n$ and $\norm[\cg]{\SOL(h)} > 0$, \qquad
+			e.g.,  $\SOL(\cf)$ is $\infty$-dimensional vector space} \\
 		\CRIT(\OUT,\SOL,(\tolabs,\tolrel))  = \ttrue \iff  \norm[\cg]{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \norm[\cg]{\SOL(f)}), \\
 		0 < \tolabs < \infty, \ 0 \le \tolrel < 1
 	\end{gather*}
 Then \alert{no algorithm} exists that can solve $(\SOL, \CRIT, \Lambda)$.
 \end{theorem}}
-{\small\begin{proof}\squeezeeqspace{2pt}
-\only<1>{Suppose such an algorithm exists.  Fix $(\tolabs,\tolrel)$.  Let $f=0$ be the input.  After $n$ function values the algorithm terminates with the data matrix $\begin{pmatrix} \vL_n &\vzero_n \end{pmatrix}$ and numerical solution $\OUT$.  There exists some $h \in \cf$  with $\norm[\cg]{\SOL(h)} > 0$ and $\vL_n(h) = \vzero_n$.  So for any $c > 0$, the input $\pm ch$ causes the algorithm to terminate with the  \alert{same} $\OUT$.  Thus, \ldots \let\qedsymbol\relax}\only<2>{\vspace{-2ex}
+\uncover<2->{\small\begin{proof}\squeezeeqspace{2pt}
+\only<2>{Suppose such an algorithm exists.  Fix $(\tolabs,\tolrel)$.  Let $f=0$ be the input.  After $n$ function values the algorithm terminates with the data matrix $\begin{pmatrix} \vL_n &\vzero_n \end{pmatrix}$ and numerical solution $\OUT$.  There exists some $h \in \cf$  with $\norm[\cg]{\SOL(h)} > 0$ and $\vL_n(h) = \vzero_n$.  So for any $c > 0$, the input $\pm ch$ causes the algorithm to terminate with the  \alert{same} $\OUT$.  Thus, \ldots \let\qedsymbol\relax}\only<3>{\vspace{-2ex}
 \begin{align*}
 	\max(\tolabs,\tolrel c\norm[\cg]{\SOL(h)}) &
 	\ge \frac 12 \bigl[ \norm[\cg]{\SOL(ch) - \OUT} + \norm[\cg]{\SOL(-ch) - \OUT} \bigr]\\
