@@ -374,7 +374,20 @@ which is impossible.  (Remember Goldilocks; $\cf$ is too big.)}
 	
 \end{frame}
 
-\begin{frame}{Dummy Frame}
+\begin{frame}{Integration with No Algorithm}
+	For the integration problem on \alert{all functions with two derivatives}
+	\vspace{-1ex}
+	\begin{gather*}
+		\cf = \{f \in C[0,1] : \norm[2]{f''} < \alert{\infty}\}, \qquad 
+		\cg  = \reals,  \qquad
+		\SOL(f) = \int_0^1 f(x) \, \dif x  \\
+		\CRIT(\OUT, \SOL(f),\tolabs)  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \tolabs, \\
+			\tfalse, & \text{otherwise}, 
+		\end{cases} \\
+		\tolabs \in (0,\infty), \qquad
+		\Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
+	\end{gather*}
+	
 	
 \end{frame}
 
