@@ -347,7 +347,7 @@ For the integration problem above with a \alert{compound error criterion}
 
 \section{No Algorithms Exist}
 
-\begin{frame}{Are There Numerical Problems with No Possible Algorithm?}
+\begin{frame}{A Numerical Problem May Have No Possible Algorithm}
 \squeezeeqspace{6pt}
 	\vspace{-2ex}
 {\small\begin{theorem} Suppose that
@@ -359,7 +359,7 @@ For the integration problem above with a \alert{compound error criterion}
 		\CRIT(\OUT,\SOL,(\tolabs,\tolrel))  = \ttrue \iff  \norm[\cg]{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \norm[\cg]{\SOL(f)}), \\
 		0 < \tolabs < \infty, \ 0 \le \tolrel < 1
 	\end{gather*}
-Then \alert{no algorithm} exists that can solve $(\SOL, \CRIT, \Lambda)$.
+Then \alert{no algorithm} can solve $(\SOL, \CRIT, \Lambda)$.
 \end{theorem}}
 \uncover<2->{\small\begin{proof}\squeezeeqspace{2pt}
 \only<2>{Suppose such an algorithm exists.  Fix $(\tolabs,\tolrel)$.  Let $f=0$ be the input.  After $n$ function values the algorithm terminates with the data matrix $\begin{pmatrix} \vL_n &\vzero_n \end{pmatrix}$ and numerical solution $\OUT$.  There exists some $h \in \cf$  with $\norm[\cg]{\SOL(h)} > 0$ and $\vL_n(h) = \vzero_n$.  So for any $c > 0$, the input $\pm ch$ causes the algorithm to terminate with the  \alert{same} $\OUT$.  Thus, \ldots \let\qedsymbol\relax}\only<3>{\vspace{-2ex}
@@ -369,7 +369,7 @@ Then \alert{no algorithm} exists that can solve $(\SOL, \CRIT, \Lambda)$.
 	&= \frac 12 \bigl[ \norm[\cg]{c\SOL(h) - \OUT} + \norm[\cg]{c\SOL(h) + \OUT} \bigr]
 	\ge  c \norm[\cg]{\SOL(h) } \quad \forall c
 \end{align*}
-which is impossible.  (Remember Goldilocks.)}
+which is impossible.  (Remember Goldilocks; $\cf$ is too big.)}
 \end{proof}}
 	
 \end{frame}
