@@ -412,16 +412,18 @@ For any set of data sites $\mX_n = (x_1, \ldots, x_n)^T$ used to integrate the f
 
 \begin{frame}[label = difference]{What Makes the Difference?}
 	
-	\vspace{-4ex}
+	\vspace{-5ex}
 Why
 \begin{itemize}
 	\item Does a trapezoidal rule algorithm exist for \hyperlink{traprule}{\beamergotobutton{this integration problem}} \\[2ex]
 	
-	\uncover<3->{No arbitrarily peaky functions are allowed because the second derivative is bounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le \alert{1}\}$.  $\cf$ is a \alert{ball}.}\\[4ex]
+	\uncover<3->{Arbitrarily large and peaky integrands are \alert{not} allowed because the second derivative is bounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le \alert{1}\}$.  $\cf$ is a \alert{ball}.}\\[4ex]
 	
 	\item But no algorithm exists for  for \hyperlink{integnoalg}{\beamergotobutton{this other integration problem}}\\[2ex]
 	
-		\uncover<2->{Arbitrarily peaky functions are allowed because the second derivative is unbounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}$.  $\cf$ is a \alert{cone}, but not all cones of input functions hinder algorithms.}
+		\uncover<2->{Arbitrarily large and peaky integrands are allowed because the second derivative is unbounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}$.  $\cf$ is a \alert{cone} (but not all cones of input functions hinder algorithms).  \\[2ex]
+		
+	More \alert{smoothness} does not help.}
 	
 \end{itemize}
 	
