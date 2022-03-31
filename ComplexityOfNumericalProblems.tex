@@ -27,6 +27,7 @@
 \addbibresource{FJH23.bib}
 \usepackage{media9}
 \usepackage[autolinebreaks]{mcode}
+\usepackage[overlay,absolute]{textpos}
 \usepackage[tikz]{mdframed}
 
 
@@ -52,6 +53,7 @@
 
 
 
+\DeclareMathOperator{\BUMP}{bump}
 \DeclareMathOperator{\TRAP}{TRAP}
 \DeclareMathOperator{\COST}{COST}
 \DeclareMathOperator{\STOP}{STOP}
@@ -261,13 +263,13 @@ where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, d
 \end{frame}
 
 \section{Examples}
-\begin{frame}{Trapezpoidal Rule Integration}
+\begin{frame}[label = traprule]{Trapezpoidal Rule Integration \hyperlink{difference}{\beamergotobutton{Why success?}}}
 
 \vspace{-2ex}
 For the integration problem above with a \alert{compound error criterion}
 \vspace{-1ex}
 \begin{gather*}
-	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \qquad 
+	\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le 1\}, \qquad 
 	\cg  = \reals,  \qquad
 	\SOL(f) = \int_0^1 f(x) \, \dif x  \\
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
@@ -290,7 +292,7 @@ For the integration problem above with a \alert{compound error criterion}
 
 \vspace{-6ex}
 \begin{gather*}
-	\cf = \{f \in C[0,1] : \norm[2]{f''} \le 1\}, \quad 
+	\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le 1\}, \quad 
 	\cg  = \reals,  \quad
 	\SOL(f) = \int_0^1 f(x) \, \dif x, \quad   \Lambda = \text{function evaluations} \\
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
@@ -374,22 +376,57 @@ which is impossible.  (Remember Goldilocks; $\cf$ is too big.)}
 	
 \end{frame}
 
-\begin{frame}{Integration with No Algorithm}
+\begin{frame}[fragile, label=integnoalg]{Integration with No Algorithm  \hyperlink{difference}{\beamergotobutton{Why failure?}}}
+	\vspace{-4ex}
 	For the integration problem on \alert{all functions with two derivatives}
 	\vspace{-1ex}
-	\begin{gather*}
-		\cf = \{f \in C[0,1] : \norm[2]{f''} < \alert{\infty}\}, \qquad 
+	\begin{minipage}{0.65\textwidth}
+		\begin{gather*}
+		\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}, \qquad 
 		\cg  = \reals,  \qquad
 		\SOL(f) = \int_0^1 f(x) \, \dif x  \\
 		\CRIT(\OUT, \SOL(f),\tolabs)  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \tolabs, \\
 			\tfalse, & \text{otherwise}, 
 		\end{cases} \\
 		\tolabs \in (0,\infty), \qquad
-		\Lambda  = \{L :  L(f) = f(x) \text{ for some } x \in [0,1]\} = \text{function evaluations}
+		\Lambda  = \text{function evaluations}
 	\end{gather*}
+	\end{minipage}
+
+Construct a bump function:
+	\begin{equation*}
+		\BUMP(x,a,b) = \begin{cases} (x - a)^2(b-x)^2, & 0 \le a \le x \le b \le 1, \\
+			0, & \text{otherwise},
+		\end{cases}
+	\qquad
+	\int_0^1 \BUMP(x,a,b) \, \dif x  =  \frac{(b-a)^5}{30} > 0
+	\end{equation*}
+For any set of data sites $\mX_n = (x_1, \ldots, x_n)^T$ used to integrate the function $0$, define $h(x) = \BUMP(x,x_{i_1}, x_{i_2})$ for adjacent data sites $x_{i_1}$ and $x_{i_2}$.  This $h$ \alert{fools} the algorithm because $h(\mX_n) =  \vzero_n$ and $\abs{\SOL(h)} > 0$.  Thus, no algorithm exists for this integration problem.
+
+	\begin{textblock}{0.3}(0.7,0.1)
+		\includegraphics[height=4cm]{IntegrationBump.eps}
+	\end{textblock}
 	
 	
 \end{frame}
+
+\begin{frame}[label = difference]{What Makes the Difference?}
+	
+	\vspace{-4ex}
+Why
+\begin{itemize}
+	\item Does a trapezoidal rule algorithm exist for \hyperlink{traprule}{\beamergotobutton{this integration problem}} \\[2ex]
+	
+	\uncover<3->{No arbitrarily peaky functions are allowed because the second derivative is bounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le \alert{1}\}$.  $\cf$ is a \alert{ball}.}\\[4ex]
+	
+	\item But no algorithm exists for  for \hyperlink{integnoalg}{\beamergotobutton{this other integration problem}}\\[2ex]
+	
+		\uncover<2->{Arbitrarily peaky functions are allowed because the second derivative is unbounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}$.  $\cf$ is a \alert{cone}, but not all cones of input functions hinder algorithms.}
+	
+\end{itemize}
+	
+\end{frame}
+
 
 \part{Cost and Complexity}
 \section{Algorithm Cost}
