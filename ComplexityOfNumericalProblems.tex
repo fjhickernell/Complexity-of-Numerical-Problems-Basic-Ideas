@@ -1,6 +1,6 @@
 %Talk given virtually to Mac Hyman and friends, November 15, 2021
 \documentclass[10pt,compress,xcolor={usenames,dvipsnames},aspectratio=169]{beamer}
-%\documentclass[xcolor={usenames,dvipsnames},aspectratio=169]{beamer} %slides and 
+%\documentclass[xcolor={usenames,dvipsnames},aspectratio=169]{beamer} %slides and https://web.iit.edu/general-counsel/faculty-handbook
 %notes
 \usepackage[T1]{fontenc}
 \usepackage{tgadventor} %Font found at https://tug.org/FontCatalogue/
@@ -269,7 +269,7 @@ where $0 < n_1 < n_2 < \cdots$.  \alert{Adaptive} designs, $\vL_{n_{\ell+1}}$, d
 For the integration problem above with a \alert{compound error criterion}
 \vspace{-1ex}
 \begin{gather*}
-	\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le 1\}, \qquad 
+	\cf = \{f \in C^1[0,1] : \norm[1]{f''} \le 1\}, \qquad 
 	\cg  = \reals,  \qquad
 	\SOL(f) = \int_0^1 f(x) \, \dif x  \\
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
@@ -292,7 +292,7 @@ For the integration problem above with a \alert{compound error criterion}
 
 \vspace{-6ex}
 \begin{gather*}
-	\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le 1\}, \quad 
+	\cf = \{f \in C^1[0,1] : \norm[1]{f''} \le 1\}, \quad 
 	\cg  = \reals,  \quad
 	\SOL(f) = \int_0^1 f(x) \, \dif x, \quad   \Lambda = \text{function evaluations} \\
 	\CRIT(\OUT, \SOL(f),(\tolabs, \tolrel))  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \max(\tolabs,\tolrel \abs{\SOL(f)}), \\
@@ -301,7 +301,7 @@ For the integration problem above with a \alert{compound error criterion}
 		\text{\alert{trapezoidal rule}: } 
 		\TRAP(\mZ_2) = \frac 1{2} \bigl( f(0) + f(1) \bigr), \\  
 		\TRAP(\mZ_{n+1}) = \frac {1}{2}\TRAP(\mZ_{n/2+1}) + \frac 1{n} \left( f(1/n) + f(3/n) \cdots + f(1 -1/n) \right)  \quad \log_2(n) \in \naturals,\\
-		\cg(\mZ_{n+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{n+1})} \le \ERR_n\},  \quad \ERR_n =  1/??n^2, \qquad \text{\cite[(7.??)]{BraPet11a}}, \\ 
+		\cg(\mZ_{n+1}) = \{I \in \reals : \abs{I - \TRAP(\mZ_{n+1})} \le \ERR_n\},  \quad \ERR_n =  1/(8n^2), \qquad \text{\cite[(7.15)]{BraPet11a}}, \\ 
 		\OUT = \TRAP(\mZ_{n+1}) + \frac 12 \left[\max(\tolabs,\tolrel\abs{\TRAP(\mZ_{n+1})- \ERR_n}) - \max(\tolabs,\tolrel \abs{\TRAP(\mZ_{n+1}) +\ERR_n}) \right] \\
 		\text{minimizes }  \max_{I \in \cg(\mZ_{n+1})} \bigl[ \abs{I - \OUT} - \max(\tolabs,\tolrel \abs{I}) 
 		\bigr ] \qquad \OUT \text{ may differ from } \TRAP(\mZ_{n+1}) \\
@@ -382,7 +382,7 @@ which is impossible.  (Remember Goldilocks; $\cf$ is too big.)}
 	\vspace{-1ex}
 	\begin{minipage}{0.65\textwidth}
 		\begin{gather*}
-		\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}, \qquad 
+		\cf = \{f \in C^1[0,1] : \norm[1]{f''} < \alert{\infty}\}, \qquad 
 		\cg  = \reals,  \qquad
 		\SOL(f) = \int_0^1 f(x) \, \dif x  \\
 		\CRIT(\OUT, \SOL(f),\tolabs)  = \begin{cases} \ttrue, & \abs{\SOL(f) - \OUT} \le \tolabs, \\
@@ -417,13 +417,13 @@ Why
 \begin{itemize}
 	\item Does a trapezoidal rule algorithm exist for \hyperlink{traprule}{\beamergotobutton{this integration problem}} \\[2ex]
 	
-	\uncover<3->{Arbitrarily large and peaky integrands are \alert{not} allowed because the second derivative is bounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} \le \alert{1}\}$.  $\cf$ is a \alert{ball}.}\\[4ex]
+	\uncover<3->{Arbitrarily large, peaky integrands are \alert{not} allowed because the second derivative is bounded, $\cf = \{f \in C^1[0,1] : \norm[1]{f''} \le \alert{1}\}$.  $\cf$ is a \alert{ball}.}\\[4ex]
 	
 	\item But no algorithm exists for  for \hyperlink{integnoalg}{\beamergotobutton{this other integration problem}}\\[2ex]
 	
-		\uncover<2->{Arbitrarily large and peaky integrands are allowed because the second derivative is unbounded, $\cf = \{f \in C^1[0,1] : \norm[2]{f''} < \alert{\infty}\}$.  $\cf$ is a \alert{cone} (but not all cones of input functions hinder algorithms).  \\[2ex]
+		\uncover<2->{Arbitrarily large, peaky integrands are allowed because the second derivative is unbounded, $\cf = \{f \in C^1[0,1] : \norm[1]{f''} < \alert{\infty}\}$.  $\cf$ is a \alert{cone} (but not all cones of input functions hinder algorithms).  \\[2ex]
 		
-	More \alert{smoothness} does not help.}
+	More \alert{smoothness} does not help, since there would still exist arbitrarily large, peaky integrands.}
 	
 \end{itemize}
 	
