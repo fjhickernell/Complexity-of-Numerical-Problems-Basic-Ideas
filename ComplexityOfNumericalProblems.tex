@@ -53,6 +53,9 @@
 
 
 
+\DeclareMathOperator{\ALG}{ALG}
+\DeclareMathOperator{\PROBLEM}{PROB}
+\DeclareMathOperator{\ICOST}{INFO}
 \DeclareMathOperator{\BUMP}{bump}
 \DeclareMathOperator{\TRAP}{TRAP}
 \DeclareMathOperator{\COST}{COST}
@@ -164,7 +167,7 @@ For mathematical problem $\SOL:\cf \to \cg$, numerical solution, $\OUT$, should 
 \uncover<2->{In addition to knowledge about $f$ based on the definition of $\cf$, the algorithm constructing the numerical solution \alert{samples} $f$, e.g., by generating function values or  derivative values:}}
     \uncover<2->{\Lambda: \cf \to \reals^t} &\uncover<2->{= \text{set of allowable \alert{data operators}}}
 \end{align*}
-\uncover<2->{A \alert{numerical problem} is described by the ordered triple $(\SOL, \CRIT, \Lambda)$.}
+\uncover<2->{A \alert{numerical problem} is described by the ordered triple $\PROBLEM = (\SOL, \CRIT, \Lambda)$.}
 
 \end{frame}
 
@@ -325,6 +328,7 @@ For the integration problem above with a \alert{compound error criterion}
 	\caption{General Algorithm Pattern}
 	\begin{algorithmic}
 		\PROB $(\SOL, \CRIT,\Lambda)$
+		
 		\INPUT black-box function, $f$;  error tolerance, $\veps$
 		
 		\Ensure  $\CRIT(\OUT,\SOL(f),\veps) = \ttrue$
@@ -344,6 +348,8 @@ For the integration problem above with a \alert{compound error criterion}
 		\RETURN $\OUT$, $n$
 	\end{algorithmic}
 \end{algorithm}	
+
+An algorithm is denoted as $\ALG = (\PROBLEM,\DATA, \STOP)$ because it is defined by the problem it is intended to solve, its data accumulator, and its stopping criterion.
 \end{frame}
 
 
@@ -432,8 +438,17 @@ Why
 
 \part{Cost and Complexity}
 \section{Algorithm Cost}
-\begin{frame}{Dummy Frame}
+\begin{frame}{Information Cost}
+Algorithms take \alert{time} to complete their work, but this may be machine-dependent.  So we often measure the computational cost of an algorithm in terms of \alert{floating point operations}.  Specifically, we would like to know the \alert{information cost}, denoted $\ICOST$, or \alert{number of function data} required by the algorithm to return the desired result.  We are often satisfied with the order as $\veps \to \vzero$.
 
+For \hyperlink{traprule}{\beamergotobutton{this integration problem, $\PROBLEM$}} and the trapezoidal rule algorithm $\ALG = (\PROBLEM,\DATA, \STOP)$  defined there,
+\[
+\ICOST(\ALG) = \Order\Bigl(\bigl[\min(\tolabs, \tolrel \abs{\SOL(f)})\bigr]^{-1/2} \Bigr)
+\]
+\end{frame}
+
+\begin{frame}{Computational Cost}
+	
 \end{frame}
 
 
