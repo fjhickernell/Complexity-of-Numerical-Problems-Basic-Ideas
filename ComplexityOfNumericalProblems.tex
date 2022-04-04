@@ -477,12 +477,15 @@ For \hyperlink{traprule}{\beamergotobutton{this integration problem, $\PROBLEM$}
 
 \begin{frame}{Complexity of a Problem}
 	
-	\vspace{-6ex}
+	\vspace{-3ex}
 	We are interested in how efficiently can a problem be solved.  The easier the problem, the lower the information cost of the best possible algorithm that solves the problem.  We call this cost the problem information complexity, $\ICOMP$
 	\[
 	\ICOMP(\PROBLEM) = \inf_{\ALG = (\PROBLEM,\cdot,\cdot)} \ICOST(\ALG)
 	\]
-	
+	Similarly the computational complexity, $\COMP$, is 
+	\[
+	\COMP(\PROBLEM) = \inf_{\ALG = (\PROBLEM,\cdot,\cdot)} \COST(\ALG)
+	\]
 	For \hyperlink{traprule}{\beamergotobutton{this integration problem, $\PROBLEM$}} the information complexity is 
 	\[
 	\ICOMP(\PROBLEM) = \Order\Bigl(\bigl[\min(\tolabs, \tolrel \abs{\SOL(f)})\bigr]^{-1/2} \Bigr)  \qquad \tolabs, \tolrel \to 0
@@ -491,6 +494,19 @@ This requires \alert{proof}.  	Thus, the trapezoidal rule algorithm presented ab
 	
 	
  \end{frame}
+
+\begin{frame}{Information Complexity for Integration of  Smoothish Integrands}
+	
+	\vspace{-6ex}
+	Consider \hyperlink{traprule}{\beamergotobutton{this integration problem, $\PROBLEM$}}.  Remember the \hyperlink{integnoalg}{\beamergotobutton{bump function}}.
+	\[
+	\ICOMP(\PROBLEM) = \Order\Bigl(\bigl[\min(\tolabs, \tolrel \abs{\SOL(f)})\bigr]^{-1/2} \Bigr)  \qquad \tolabs, \tolrel \to 0
+	\]
+	This requires \alert{proof}.  	Thus, the trapezoidal rule algorithm presented above is asymptotically optimal.  
+	
+	
+\end{frame}
+
 
 
 \part{Tractability}
